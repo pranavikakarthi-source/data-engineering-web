@@ -1,26 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-stylized: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-grotesk), ui-monospace, SFMono-Regular, monospace;
+
+  --color-navy: #123c64;
+  --color-navy2: #1e5b88;
+  --color-teal: #22b8b0;
+  --color-teal2: #2bc59e;
+  --color-blue: #3d72f2;
+  --color-cyan: #37afe5;
+  --color-ink: #10213a;
+  --color-muted: #627089;
+  --color-soft: #f5f9fc;
+  --color-soft2: #eef5fa;
+  --color-line: #dee8f0;
+
+  --color-brand-blue: #123c64;
+  --color-brand-teal: #22b8b0;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-plus-jakarta: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-space-grotesk: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --navy: #123c64;
+  --navy2: #1e5b88;
+  --teal: #22b8b0;
+  --teal2: #2bc59e;
+  --blue: #3d72f2;
+  --cyan: #37afe5;
+  --ink: #10213a;
+  --muted: #627089;
+  --soft: #f5f9fc;
+  --soft2: #eef5fa;
+  --line: #dee8f0;
+  --white: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  body {
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background-color: #ffffff;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* User Specified Brand Gradient: linear-gradient(135deg, #123c64, #22b8b0) */
+.gradient-double-shade,
+.gradient-brand {
+  background: linear-gradient(135deg, #123c64 0%, #22b8b0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.gradient-double-teal {
+  background: linear-gradient(135deg, #1e5b88 0%, #2bc59e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-double-shade,
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #123c64 0%, #22b8b0 100%);
+}
+
+.bg-double-shade-hover:hover,
+.bg-brand-gradient-hover:hover {
+  background: linear-gradient(135deg, #0d2e4d 0%, #1da39c 100%);
+}
+
+/* Soft ambient glows */
+.glow-teal {
+  box-shadow: 0 10px 30px -5px rgba(46, 196, 182, 0.28);
+}
+
+.glow-blue {
+  box-shadow: 0 10px 30px -5px rgba(31, 111, 178, 0.25);
+}
+
+/* Glass panels tuned for ultra-clean light mode */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.glass-panel-subtle {
+  background: rgba(248, 250, 252, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+/* Modern light scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Horizontal Gradient Mask for smooth fade-in/fade-out at edges */
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+/* Card Hover & Interactive Effects */
+.card-hover-effect {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px -15px rgba(31, 111, 178, 0.18), 0 0 25px -5px rgba(46, 196, 182, 0.22);
+}
+
+/* Shimmer Sweep effect on hover */
+.shimmer-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg);
+  transition: all 0.75s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shimmer-card:hover::after {
+  left: 100%;
+  opacity: 1;
+}
+
+/* Floating Animation */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
